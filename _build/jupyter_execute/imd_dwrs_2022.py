@@ -2,17 +2,23 @@
 # coding: utf-8
 
 # # Data Preparation
-# - @author: Hamid Ali Syed
-# - @email: hamidsyed37[at]gmail.com
+# - author: Hamid Ali Syed
+# - email: hamidsyed37[at]gmail[dot]com
 
 # In[1]:
 
 
+import warnings
+warnings.filterwarnings("ignore")
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
+
+# ## Data collection
+# ### Let's do some Web Scrapping
+# Let's do some Web Scrapping. We can scrap the radar site information from the website of the Indian Meteorological Department (IMD) and extract location information from the HTML using BeautifulSoup. Then, we can clean and transform the extracted data into a Pandas DataFrame, with longitude and latitude coordinates for each location. Finally, we can plot the DataFrame as a scatter plot using longitude and latitude as x and y axes, respectively.
 
 # In[2]:
 
@@ -49,12 +55,11 @@ df.plot(kind='scatter', x='longitude', y='latitude')
 df
 
 
+# We have procured the name, lat, & lon info of all the radar sites and is saved in `df`. Now, let's search for their frequency bands. I have found a webpage on the IMD website that contains this information for most of the radars. Let's make a request to a URL and create a BeautifulSoup object to parse the HTML content. It will find a table on the page, then we can extract the headers and rows of the table, and create a Pandas DataFrame `df2` from the table data.
+# <p>Drop the "S No" column, clean up the "Type of DWR" and "DWR Station" columns by removing certain text, and replace some values in the "DWR Station" column.</p>
+
 # In[3]:
 
-
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
 
 # make a request to the URL
 url = "https://mausam.imd.gov.in/imd_latest/contents/imd-dwr-network.php"
@@ -82,10 +87,10 @@ df2['Type of DWR'] = df2['Type of DWR'].str.replace(' - Band', '')
 df2['DWR Station'].replace('Delhi (Palam)', 'Palam', inplace=True)
 df2['DWR Station'] = df2['DWR Station'].str.replace('\(ISRO\)', '').str.replace('\(Mausam Bhawan\)', 
                                                                                 '').str.strip()
-
-
 df2
 
+
+# Let's merge two previously created Pandas DataFrames, `df` and `df2`, using the "title" and "DWR Station" columns as keys, respectively. It will drop the "DWR Station" column, rename the "Type of DWR" column as "Band", and replace some values in the "title" column. The code will count the number of NaN values in the "Band" column, print this count, and return the resulting merged DataFrame.
 
 # In[4]:
 
@@ -98,6 +103,8 @@ num_nans = merged_df['Band'].isna().sum()
 print(num_nans)
 merged_df
 
+
+# Since there are NaN values in the "State" column, we can find the state names using lat and lon info. We can use the Cartopy library to create a map of India with state boundaries and labels. Then we will create a pandas DataFrame `gdf` containing the latitude and longitude coordinates of each state and union territory, and try to map the names of these places in the `merged_df`
 
 # In[5]:
 
@@ -152,7 +159,7 @@ for state in states:
     ax.text(
         lon, lat, name, size=7, transform=data_proj, ha="center", va="center",
         path_effects=[PathEffects.withStroke(linewidth=5, foreground="w")]
-    )                                  
+    )
 
 
 # In[7]:

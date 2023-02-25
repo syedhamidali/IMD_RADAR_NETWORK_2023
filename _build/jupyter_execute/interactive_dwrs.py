@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Visuaization
-# - @author: Hamid Ali Syed
-# - @email: hamidsyed37[at]gmail.com
+# # Visualization
+# - author: Hamid Ali Syed
+# - email: hamidsyed37[at]gmail[dot]com
+
+# ## Import packages
 
 # In[1]:
 
@@ -20,6 +22,8 @@ import cartopy.crs as ccrs
 from IPython.display import display
 
 
+# ## Read the data
+
 # In[2]:
 
 
@@ -30,15 +34,14 @@ df = pd.read_csv("IMD_Radar_Sites_2022.csv").drop(["Unnamed: 0", "State"], axis=
 
 
 counts = df.groupby('Band').agg(count=('Band', 'size'))
+display(counts)
+
+# Print the total number of radars
+total_radars = counts.sum()
+print(f"Total number of radars: {total_radars[0]}")
 
 
 # In[4]:
-
-
-counts
-
-
-# In[5]:
 
 
 import shapely.geometry as sgeom
@@ -59,14 +62,14 @@ def draw_circle_on_map(df):
     return gdf
 
 
-# In[6]:
+# In[5]:
 
 
 gdf = draw_circle_on_map(df)
 gdf
 
 
-# In[7]:
+# In[6]:
 
 
 points = df.hvplot.points(x='Longitude', y='Latitude', geo=True, color='Band',
@@ -84,7 +87,7 @@ plot = points * circles
 display(plot)
 
 
-# In[8]:
+# In[7]:
 
 
 import urllib.request
@@ -93,20 +96,20 @@ urllib.request.urlretrieve(url, "map_features.py")
 import map_features as mf
 
 
-# In[9]:
+# In[8]:
 
 
 get_ipython().system('git clone https://github.com/aman1chaudhary/India-Shapefiles.git')
 
 
-# In[10]:
+# In[9]:
 
 
 india = gpd.read_file("India-Shapefiles/India Boundary/")
 states = gpd.read_file("India-Shapefiles/India States Boundary/")
 
 
-# In[11]:
+# In[10]:
 
 
 fig = plt.figure(figsize = [10,12], dpi=300)
@@ -152,7 +155,7 @@ ax.set_autoscale_on(True)
 plt.show()
 
 
-# In[12]:
+# In[11]:
 
 
 import matplotlib.pyplot as plt
@@ -237,4 +240,50 @@ ax.set_autoscale_on(True)
 # Show the legend and the plot
 ax.legend(title=f"Total DWRs: {counts.sum()[0]}", shadow=True)
 plt.show()
+
+
+# In[12]:
+
+
+import ipyleaflet as ipyl
+# Create the polygon layer
+gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.Longitude, df.Latitude))
+polygons_layer = ipyl.GeoJSON(
+    data=gdf.__geo_interface__,
+    style={'color': 'gray', 'fillOpacity': 0.2})
+
+
+# In[13]:
+
+
+import folium
+from folium.plugins import MarkerCluster
+
+# Set xlim and ylim
+xlim = (df.Longitude.min() - 5, df.Longitude.max() + 3)
+ylim = (df.Latitude.min() - 3, df.Latitude.max() + 3)
+
+# Create the folium map object
+m = folium.Map(location=[df['Latitude'].mean(), df['Longitude'].mean()], zoom_start=5, tiles='openstreetmap',xlim=xlim, ylim=ylim)
+
+# Add markers to the map
+marker_cluster = MarkerCluster().add_to(m)
+for idx, row in df.iterrows():
+    folium.Marker([row['Latitude'], row['Longitude']], 
+                  popup=f"Site: {row['Site']}, Band: {row['Band']}", 
+                  icon=folium.Icon(color=row['Band'])).add_to(marker_cluster)
+
+# Add circles to the map
+for idx, row in gdf.iterrows():
+    if row['Band'] == 'X':
+        radius = 100e3
+    else:
+        radius = 250e3
+    folium.Circle(location=[row['geometry'].y, row['geometry'].x],
+                  radius=radius,
+                  fill=True,
+                  fill_opacity=0.2,
+                  color='gray').add_to(m)
+# Display the map
+m
 

@@ -3,7 +3,7 @@
 
 # # IMD Radar Network 2023
 # - *author: Hamid Ali Syed*
-# - *email: hamidsyed37[at]gmail.com*
+# - *email: hamidsyed37[at]gmail[dot]com*
 # - *date: Feb 25, 2023*
 # 
 # ## Introduction to India Meteorological Department (IMD) Radar Network
@@ -27,4 +27,10 @@
 # 
 # Best,
 # 
-# H. A. Syed
+# *-H. A. Syed*
+
+# In[ ]:
+
+
+
+

@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Visuaization" href="interactive_dwrs.html" />
+    <link rel="next" title="Visualization" href="interactive_dwrs.html" />
     <link rel="prev" title="IMD Radar Network 2023" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -126,7 +128,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interactive_dwrs.html">
-   Visuaization
+   Visualization
   </a>
  </li>
 </ul>
@@ -313,12 +315,43 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-collection">
+   Data collection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-s-do-some-web-scrapping">
+     Let’s do some Web Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -330,6 +363,26 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-collection">
+   Data collection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#let-s-do-some-web-scrapping">
+     Let’s do some Web Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -340,12 +393,14 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
 <h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>&#64;author: Hamid Ali Syed</p></li>
-<li><p>&#64;email: hamidsyed37[at]<a class="reference external" href="http://gmail.com">gmail.com</a></p></li>
+<li><p>author: Hamid Ali Syed</p></li>
+<li><p>email: hamidsyed37[at]gmail[dot]com</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -353,6 +408,11 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<section id="data-collection">
+<h2>Data collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">#</a></h2>
+<section id="let-s-do-some-web-scrapping">
+<h3>Let’s do some Web Scrapping<a class="headerlink" href="#let-s-do-some-web-scrapping" title="Permalink to this headline">#</a></h3>
+<p>Let’s do some Web Scrapping. We can scrap the radar site information from the website of the Indian Meteorological Department (IMD) and extract location information from the HTML using BeautifulSoup. Then, we can clean and transform the extracted data into a Pandas DataFrame, with longitude and latitude coordinates for each location. Finally, we can plot the DataFrame as a scatter plot using longitude and latitude as x and y axes, respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mausam.imd.gov.in/imd_latest/contents/index_radar.php&quot;</span>
@@ -613,16 +673,13 @@ title="Print to PDF"
     </tr>
   </tbody>
 </table>
-</div></div><img alt="_images/imd_dwrs_2022_2_1.png" src="_images/imd_dwrs_2022_2_1.png" />
+</div></div><img alt="_images/imd_dwrs_2022_3_1.png" src="_images/imd_dwrs_2022_3_1.png" />
 </div>
 </div>
-<div class="cell docutils container">
+<p>We have procured the name, lat, &amp; lon info of all the radar sites and is saved in <code class="docutils literal notranslate"><span class="pre">df</span></code>. Now, let’s search for their frequency bands. I have found a webpage on the IMD website that contains this information for most of the radars. Let’s make a request to a URL and create a BeautifulSoup object to parse the HTML content. It will find a table on the page, then we can extract the headers and rows of the table, and create a Pandas DataFrame <code class="docutils literal notranslate"><span class="pre">df2</span></code> from the table data.</p>
+<p>Drop the "S No" column, clean up the "Type of DWR" and "DWR Station" columns by removing certain text, and replace some values in the "DWR Station" column.</p><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="c1"># make a request to the URL</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a request to the URL</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mausam.imd.gov.in/imd_latest/contents/imd-dwr-network.php&quot;</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
@@ -648,17 +705,11 @@ title="Print to PDF"
 <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Delhi (Palam)&#39;</span><span class="p">,</span> <span class="s1">&#39;Palam&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\(ISRO\)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\(Mausam Bhawan\)&#39;</span><span class="p">,</span> 
                                                                                 <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-
 <span class="n">df2</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yq/7n9vj93d6bq4gq64hx_6qgym0000gp/T/ipykernel_26103/3658484605.py:29: FutureWarning: The default value of regex will change from True to False in a future version.
-  df2[&#39;DWR Station&#39;] = df2[&#39;DWR Station&#39;].str.replace(&#39;\(ISRO\)&#39;, &#39;&#39;).str.replace(&#39;\(Mausam Bhawan\)&#39;,
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -837,6 +888,7 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<p>Let’s merge two previously created Pandas DataFrames, <code class="docutils literal notranslate"><span class="pre">df</span></code> and <code class="docutils literal notranslate"><span class="pre">df2</span></code>, using the “title” and “DWR Station” columns as keys, respectively. It will drop the “DWR Station” column, rename the “Type of DWR” column as “Band”, and replace some values in the “title” column. The code will count the number of NaN values in the “Band” column, print this count, and return the resulting merged DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
@@ -1147,6 +1199,7 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<p>Since there are NaN values in the “State” column, we can find the state names using lat and lon info. We can use the Cartopy library to create a map of India with state boundaries and labels. Then we will create a pandas DataFrame <code class="docutils literal notranslate"><span class="pre">gdf</span></code> containing the latitude and longitude coordinates of each state and union territory, and try to map the names of these places in the <code class="docutils literal notranslate"><span class="pre">merged_df</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.io.shapereader</span> <span class="k">as</span> <span class="nn">shpreader</span>
@@ -1200,18 +1253,12 @@ title="Print to PDF"
     <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
         <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">data_proj</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
         <span class="n">path_effects</span><span class="o">=</span><span class="p">[</span><span class="n">PathEffects</span><span class="o">.</span><span class="n">withStroke</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)]</span>
-    <span class="p">)</span>                                  
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/syed44/miniconda3/envs/ds/lib/python3.10/site-packages/cartopy/mpl/style.py:76: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-/Users/syed44/miniconda3/envs/ds/lib/python3.10/site-packages/shapely/predicates.py:798: RuntimeWarning: invalid value encountered in intersects
-  return lib.intersects(a, b, **kwargs)
-</pre></div>
-</div>
-<img alt="_images/imd_dwrs_2022_6_1.png" src="_images/imd_dwrs_2022_6_1.png" />
+<img alt="_images/imd_dwrs_2022_10_0.png" src="_images/imd_dwrs_2022_10_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2184,16 +2231,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yq/7n9vj93d6bq4gq64hx_6qgym0000gp/T/ipykernel_26103/1355819478.py:3: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  nan_df.loc[:, &#39;Band&#39;] = nan_df[&#39;Band&#39;].fillna(&#39;X&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2221,6 +2258,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2260,7 +2299,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
     <a class='right-next' id="next-link" href="interactive_dwrs.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Visuaization</p>
+        <p class="prev-next-title">Visualization</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
