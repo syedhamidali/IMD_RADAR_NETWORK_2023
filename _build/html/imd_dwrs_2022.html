@@ -1,0 +1,2292 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Data Preparation &#8212; IMD Radar Network</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visuaization" href="interactive_dwrs.html" />
+    <link rel="prev" title="IMD Radar Network 2023" href="introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IMD Radar Network</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   IMD Radar Network 2023
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interactive_dwrs.html">
+   Visuaization
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/syedhamidali/IMD_RADAR_NETWORK_2023/master?urlpath=tree/docs/imd_dwrs_2022.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/syedhamidali/IMD_RADAR_NETWORK_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/syedhamidali/IMD_RADAR_NETWORK_2023/issues/new?title=Issue%20on%20page%20%2Fimd_dwrs_2022.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/imd_dwrs_2022.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Data Preparation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>&#64;author: Hamid Ali Syed</p></li>
+<li><p>&#64;email: hamidsyed37[at]<a class="reference external" href="http://gmail.com">gmail.com</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mausam.imd.gov.in/imd_latest/contents/index_radar.php&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+<span class="c1"># extract the relevant part of the HTML</span>
+<span class="n">images_html</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;images: [&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;],</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># split the HTML into individual locations and extract the relevant information</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;images: [&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;],</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">location_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;title&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">location_dict</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;latitude&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">location_dict</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;longitude&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">location_dict</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">locations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location_dict</span><span class="p">)</span>
+
+<span class="c1"># create a DataFrame from the list of dictionaries</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">locations</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;longitude&quot;:&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Goa&quot;</span><span class="p">,</span> <span class="s2">&quot;Panaji&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>latitude</th>
+      <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Bhopal</td>
+      <td>23.259900</td>
+      <td>77.412600</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Agartala</td>
+      <td>23.831500</td>
+      <td>91.286800</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Delhi</td>
+      <td>28.563200</td>
+      <td>77.191200</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Bhuj</td>
+      <td>23.242000</td>
+      <td>69.666900</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Chennai</td>
+      <td>13.082700</td>
+      <td>80.270700</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Panaji</td>
+      <td>15.490900</td>
+      <td>73.827800</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Gopalpur</td>
+      <td>19.264700</td>
+      <td>84.862000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Hyderabad</td>
+      <td>17.385000</td>
+      <td>78.486700</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Jaipur</td>
+      <td>26.912400</td>
+      <td>75.787300</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Kolkata</td>
+      <td>22.572600</td>
+      <td>88.363900</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Kochi</td>
+      <td>9.931200</td>
+      <td>76.267300</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Karaikal</td>
+      <td>10.925400</td>
+      <td>79.838000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Lucknow</td>
+      <td>26.846700</td>
+      <td>80.946200</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Machilipatnam</td>
+      <td>16.190500</td>
+      <td>81.136200</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Mumbai</td>
+      <td>19.076000</td>
+      <td>72.877700</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Nagpur</td>
+      <td>21.145800</td>
+      <td>79.088200</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Sohra</td>
+      <td>25.270200</td>
+      <td>91.732300</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Patiala</td>
+      <td>30.339800</td>
+      <td>76.386900</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Patna</td>
+      <td>25.594100</td>
+      <td>85.137600</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Srinagar</td>
+      <td>34.083656</td>
+      <td>74.797371</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Jammu</td>
+      <td>32.926600</td>
+      <td>74.857000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Thiruvananthapuram</td>
+      <td>8.524100</td>
+      <td>76.936600</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Visakhapatnam</td>
+      <td>17.686800</td>
+      <td>83.218500</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Mohanbari</td>
+      <td>27.472800</td>
+      <td>94.912000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Paradip</td>
+      <td>20.316600</td>
+      <td>86.611400</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Sriharikota</td>
+      <td>13.725900</td>
+      <td>80.226600</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Jot</td>
+      <td>32.486800</td>
+      <td>76.059300</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Murari</td>
+      <td>30.789800</td>
+      <td>78.917850</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Palam</td>
+      <td>28.590100</td>
+      <td>77.088800</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Mukteshwar</td>
+      <td>29.460400</td>
+      <td>79.655800</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Veravali</td>
+      <td>19.734300</td>
+      <td>72.876300</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Kufri</td>
+      <td>31.097800</td>
+      <td>77.267800</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Surkandaji</td>
+      <td>30.411400</td>
+      <td>78.288500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/imd_dwrs_2022_2_1.png" src="_images/imd_dwrs_2022_2_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># make a request to the URL</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mausam.imd.gov.in/imd_latest/contents/imd-dwr-network.php&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1"># create a BeautifulSoup object</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+<span class="c1"># find the table on the page</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)</span>
+
+<span class="c1"># extract the table headers</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">header</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">)]</span>
+
+<span class="c1"># extract the table rows</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)]</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+
+<span class="c1"># create a DataFrame from the table data</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;S No&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; - Band&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Delhi (Palam)&#39;</span><span class="p">,</span> <span class="s1">&#39;Palam&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\(ISRO\)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;\(Mausam Bhawan\)&#39;</span><span class="p">,</span> 
+                                                                                <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yq/7n9vj93d6bq4gq64hx_6qgym0000gp/T/ipykernel_26103/3658484605.py:29: FutureWarning: The default value of regex will change from True to False in a future version.
+  df2[&#39;DWR Station&#39;] = df2[&#39;DWR Station&#39;].str.replace(&#39;\(ISRO\)&#39;, &#39;&#39;).str.replace(&#39;\(Mausam Bhawan\)&#39;,
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DWR Station</th>
+      <th>State</th>
+      <th>Type of DWR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Agartala</td>
+      <td>Tripura</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bhopal</td>
+      <td>Madhya Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bhuj</td>
+      <td>Gujarat</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Chennai</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cherrapunjee</td>
+      <td>Meghalaya</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Palam</td>
+      <td>Delhi</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Panaji</td>
+      <td>Goa</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Gopalpur</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Hyderabad</td>
+      <td>Telangana</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Jaipur</td>
+      <td>Rajasthan</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Kolkata</td>
+      <td>West Bengal</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Kochi</td>
+      <td>Kerala</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Karaikal</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Lucknow</td>
+      <td>Uttar Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Machilipatnam</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Mohanbari</td>
+      <td>Assam</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Mumbai</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Nagpur</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>New Delhi</td>
+      <td>Delhi</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Paradip</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Patiala</td>
+      <td>Punjab</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Patna</td>
+      <td>Bihar</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Srinagar</td>
+      <td>Jammu and Kashmir</td>
+      <td>X</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Thiruvananthapuram</td>
+      <td>Kerala</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Visakhapatnam</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">])</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">:</span> <span class="s1">&#39;Band&#39;</span><span class="p">})</span>
+<span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Goa&quot;</span><span class="p">,</span> <span class="s2">&quot;Panaji&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">num_nans</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;Band&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_nans</span><span class="p">)</span>
+<span class="n">merged_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>State</th>
+      <th>Band</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bhopal</td>
+      <td>23.259900</td>
+      <td>77.412600</td>
+      <td>Madhya Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Agartala</td>
+      <td>23.831500</td>
+      <td>91.286800</td>
+      <td>Tripura</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Delhi</td>
+      <td>28.563200</td>
+      <td>77.191200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bhuj</td>
+      <td>23.242000</td>
+      <td>69.666900</td>
+      <td>Gujarat</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Chennai</td>
+      <td>13.082700</td>
+      <td>80.270700</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Panaji</td>
+      <td>15.490900</td>
+      <td>73.827800</td>
+      <td>Goa</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Gopalpur</td>
+      <td>19.264700</td>
+      <td>84.862000</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Hyderabad</td>
+      <td>17.385000</td>
+      <td>78.486700</td>
+      <td>Telangana</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Jaipur</td>
+      <td>26.912400</td>
+      <td>75.787300</td>
+      <td>Rajasthan</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Kolkata</td>
+      <td>22.572600</td>
+      <td>88.363900</td>
+      <td>West Bengal</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Kochi</td>
+      <td>9.931200</td>
+      <td>76.267300</td>
+      <td>Kerala</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Karaikal</td>
+      <td>10.925400</td>
+      <td>79.838000</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Lucknow</td>
+      <td>26.846700</td>
+      <td>80.946200</td>
+      <td>Uttar Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Machilipatnam</td>
+      <td>16.190500</td>
+      <td>81.136200</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Mumbai</td>
+      <td>19.076000</td>
+      <td>72.877700</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Nagpur</td>
+      <td>21.145800</td>
+      <td>79.088200</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Sohra</td>
+      <td>25.270200</td>
+      <td>91.732300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Patiala</td>
+      <td>30.339800</td>
+      <td>76.386900</td>
+      <td>Punjab</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Patna</td>
+      <td>25.594100</td>
+      <td>85.137600</td>
+      <td>Bihar</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Srinagar</td>
+      <td>34.083656</td>
+      <td>74.797371</td>
+      <td>Jammu and Kashmir</td>
+      <td>X</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Jammu</td>
+      <td>32.926600</td>
+      <td>74.857000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Thiruvananthapuram</td>
+      <td>8.524100</td>
+      <td>76.936600</td>
+      <td>Kerala</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Visakhapatnam</td>
+      <td>17.686800</td>
+      <td>83.218500</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Mohanbari</td>
+      <td>27.472800</td>
+      <td>94.912000</td>
+      <td>Assam</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Paradip</td>
+      <td>20.316600</td>
+      <td>86.611400</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Sriharikota</td>
+      <td>13.725900</td>
+      <td>80.226600</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Jot</td>
+      <td>32.486800</td>
+      <td>76.059300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Murari</td>
+      <td>30.789800</td>
+      <td>78.917850</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Palam</td>
+      <td>28.590100</td>
+      <td>77.088800</td>
+      <td>Delhi</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Mukteshwar</td>
+      <td>29.460400</td>
+      <td>79.655800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Veravali</td>
+      <td>19.734300</td>
+      <td>72.876300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Kufri</td>
+      <td>31.097800</td>
+      <td>77.267800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Surkandaji</td>
+      <td>30.411400</td>
+      <td>78.288500</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.io.shapereader</span> <span class="k">as</span> <span class="nn">shpreader</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="c1"># Load the Natural Earth dataset</span>
+<span class="n">states_shp</span> <span class="o">=</span> <span class="n">shpreader</span><span class="o">.</span><span class="n">natural_earth</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span>
+                                     <span class="n">category</span><span class="o">=</span><span class="s1">&#39;cultural&#39;</span><span class="p">,</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;admin_1_states_provinces&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.io.shapereader</span> <span class="k">as</span> <span class="nn">shpreader</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">feat</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patheffects</span> <span class="k">as</span> <span class="nn">PathEffects</span>
+
+<span class="c1"># get the data</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">shpreader</span><span class="o">.</span><span class="n">natural_earth</span><span class="p">(</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s1">&#39;cultural&#39;</span><span class="p">,</span> 
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;admin_1_states_provinces&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">shpreader</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">records</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;India&quot;</span><span class="p">]</span>
+<span class="n">states_geom</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">ShapelyFeature</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">states</span><span class="p">],</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">data_proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+
+<span class="c1"># create the plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">data_proj</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">feat</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># ax.add_feature(feat.COASTLINE, color=&quot;k&quot;, lw=0.2)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">())</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">states_geom</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># # add the names</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> 
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">data_proj</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">path_effects</span><span class="o">=</span><span class="p">[</span><span class="n">PathEffects</span><span class="o">.</span><span class="n">withStroke</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)]</span>
+    <span class="p">)</span>                                  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/syed44/miniconda3/envs/ds/lib/python3.10/site-packages/cartopy/mpl/style.py:76: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
+  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
+/Users/syed44/miniconda3/envs/ds/lib/python3.10/site-packages/shapely/predicates.py:798: RuntimeWarning: invalid value encountered in intersects
+  return lib.intersects(a, b, **kwargs)
+</pre></div>
+</div>
+<img alt="_images/imd_dwrs_2022_6_1.png" src="_images/imd_dwrs_2022_6_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">locs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">locs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="n">lon</span><span class="p">}</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">locs</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;index&#39;</span><span class="p">:</span><span class="s1">&#39;state&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>lat</th>
+      <th>lon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Ladakh</td>
+      <td>33.885957</td>
+      <td>77.634965</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Arunachal Pradesh</td>
+      <td>28.035900</td>
+      <td>94.660514</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sikkim</td>
+      <td>27.572023</td>
+      <td>88.448173</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>West Bengal</td>
+      <td>23.805249</td>
+      <td>87.972564</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Assam</td>
+      <td>26.356938</td>
+      <td>92.831287</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Uttarakhand</td>
+      <td>30.163721</td>
+      <td>79.196121</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Nagaland</td>
+      <td>26.059820</td>
+      <td>94.448403</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Manipur</td>
+      <td>24.730388</td>
+      <td>93.861591</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Mizoram</td>
+      <td>23.292031</td>
+      <td>92.819139</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Tripura</td>
+      <td>23.754753</td>
+      <td>91.728537</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Meghalaya</td>
+      <td>25.536122</td>
+      <td>91.287036</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Punjab</td>
+      <td>30.848293</td>
+      <td>75.404354</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Rajasthan</td>
+      <td>26.592714</td>
+      <td>73.834251</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Gujarat</td>
+      <td>22.712829</td>
+      <td>71.558165</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Himachal Pradesh</td>
+      <td>31.936310</td>
+      <td>77.220849</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Jammu and Kashmir</td>
+      <td>33.557813</td>
+      <td>75.079701</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Bihar</td>
+      <td>25.662102</td>
+      <td>85.604230</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Uttar Pradesh</td>
+      <td>26.934734</td>
+      <td>80.541922</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Andhra Pradesh</td>
+      <td>15.721672</td>
+      <td>79.924211</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Odisha</td>
+      <td>20.517113</td>
+      <td>84.414536</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Dadra and Nagar Haveli and Daman and Diu</td>
+      <td>20.199380</td>
+      <td>72.992494</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Maharashtra</td>
+      <td>19.460457</td>
+      <td>76.111348</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Goa</td>
+      <td>15.352195</td>
+      <td>74.045828</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Karnataka</td>
+      <td>14.719826</td>
+      <td>76.155168</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Kerala</td>
+      <td>10.423815</td>
+      <td>76.424882</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Puducherry</td>
+      <td>11.960162</td>
+      <td>78.885684</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Tamil Nadu</td>
+      <td>11.014705</td>
+      <td>78.402304</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Lakshadweep</td>
+      <td>10.120942</td>
+      <td>72.827601</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Andaman and Nicobar</td>
+      <td>11.133776</td>
+      <td>92.975529</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Jharkhand</td>
+      <td>23.642010</td>
+      <td>85.533387</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Delhi</td>
+      <td>28.660865</td>
+      <td>77.107946</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Chandigarh</td>
+      <td>30.743535</td>
+      <td>76.768380</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Madhya Pradesh</td>
+      <td>23.539092</td>
+      <td>78.292780</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Chhattisgarh</td>
+      <td>21.255901</td>
+      <td>82.033368</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Haryana</td>
+      <td>29.208370</td>
+      <td>76.336467</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Telangana</td>
+      <td>17.796650</td>
+      <td>79.050764</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># merged_df.sort_values(by=[&#39;latitude&#39;, &#39;longitude&#39;], ascending=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DWR Station&#39;</span><span class="p">])</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">:</span> <span class="s1">&#39;Band&#39;</span><span class="p">})</span>
+<span class="n">merged_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>State</th>
+      <th>Band</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bhopal</td>
+      <td>23.259900</td>
+      <td>77.412600</td>
+      <td>Madhya Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Agartala</td>
+      <td>23.831500</td>
+      <td>91.286800</td>
+      <td>Tripura</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Delhi</td>
+      <td>28.563200</td>
+      <td>77.191200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bhuj</td>
+      <td>23.242000</td>
+      <td>69.666900</td>
+      <td>Gujarat</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Chennai</td>
+      <td>13.082700</td>
+      <td>80.270700</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Panaji</td>
+      <td>15.490900</td>
+      <td>73.827800</td>
+      <td>Goa</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Gopalpur</td>
+      <td>19.264700</td>
+      <td>84.862000</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Hyderabad</td>
+      <td>17.385000</td>
+      <td>78.486700</td>
+      <td>Telangana</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Jaipur</td>
+      <td>26.912400</td>
+      <td>75.787300</td>
+      <td>Rajasthan</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Kolkata</td>
+      <td>22.572600</td>
+      <td>88.363900</td>
+      <td>West Bengal</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Kochi</td>
+      <td>9.931200</td>
+      <td>76.267300</td>
+      <td>Kerala</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Karaikal</td>
+      <td>10.925400</td>
+      <td>79.838000</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Lucknow</td>
+      <td>26.846700</td>
+      <td>80.946200</td>
+      <td>Uttar Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Machilipatnam</td>
+      <td>16.190500</td>
+      <td>81.136200</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Mumbai</td>
+      <td>19.076000</td>
+      <td>72.877700</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Nagpur</td>
+      <td>21.145800</td>
+      <td>79.088200</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Sohra</td>
+      <td>25.270200</td>
+      <td>91.732300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Patiala</td>
+      <td>30.339800</td>
+      <td>76.386900</td>
+      <td>Punjab</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Patna</td>
+      <td>25.594100</td>
+      <td>85.137600</td>
+      <td>Bihar</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Srinagar</td>
+      <td>34.083656</td>
+      <td>74.797371</td>
+      <td>Jammu and Kashmir</td>
+      <td>X</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Jammu</td>
+      <td>32.926600</td>
+      <td>74.857000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Thiruvananthapuram</td>
+      <td>8.524100</td>
+      <td>76.936600</td>
+      <td>Kerala</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Visakhapatnam</td>
+      <td>17.686800</td>
+      <td>83.218500</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Mohanbari</td>
+      <td>27.472800</td>
+      <td>94.912000</td>
+      <td>Assam</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Paradip</td>
+      <td>20.316600</td>
+      <td>86.611400</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Sriharikota</td>
+      <td>13.725900</td>
+      <td>80.226600</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Jot</td>
+      <td>32.486800</td>
+      <td>76.059300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Murari</td>
+      <td>30.789800</td>
+      <td>78.917850</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Palam</td>
+      <td>28.590100</td>
+      <td>77.088800</td>
+      <td>Delhi</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Mukteshwar</td>
+      <td>29.460400</td>
+      <td>79.655800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Veravali</td>
+      <td>19.734300</td>
+      <td>72.876300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Kufri</td>
+      <td>31.097800</td>
+      <td>77.267800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Surkandaji</td>
+      <td>30.411400</td>
+      <td>78.288500</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">radians</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">asin</span>
+
+<span class="c1"># Function to calculate the haversine distance between two coordinates in km</span>
+<span class="k">def</span> <span class="nf">haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">):</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mi">6371</span>  <span class="c1"># radius of Earth in km</span>
+    <span class="n">dLat</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lat2</span> <span class="o">-</span> <span class="n">lat1</span><span class="p">)</span>
+    <span class="n">dLon</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lon2</span> <span class="o">-</span> <span class="n">lon1</span><span class="p">)</span>
+    <span class="n">lat1</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span>
+    <span class="n">lat2</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">dLat</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">dLon</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">asin</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">R</span><span class="o">*</span><span class="n">c</span>
+
+<span class="c1"># Loop through each row in merged_df</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;State&quot;</span><span class="p">]):</span>
+        <span class="n">min_dist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="n">closest_state</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># Loop through each row in gdf to find the closest one</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">gdf_row</span> <span class="ow">in</span> <span class="n">gdf</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">haversine</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">gdf_row</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">gdf_row</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">min_dist</span><span class="p">:</span>
+                <span class="n">min_dist</span> <span class="o">=</span> <span class="n">dist</span>
+                <span class="n">closest_state</span> <span class="o">=</span> <span class="n">gdf_row</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span>
+        <span class="n">merged_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;State&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest_state</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>State</th>
+      <th>Band</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19</th>
+      <td>Srinagar</td>
+      <td>34.083656</td>
+      <td>74.797371</td>
+      <td>Jammu and Kashmir</td>
+      <td>X</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Jammu</td>
+      <td>32.926600</td>
+      <td>74.857000</td>
+      <td>Jammu and Kashmir</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Jot</td>
+      <td>32.486800</td>
+      <td>76.059300</td>
+      <td>Himachal Pradesh</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Kufri</td>
+      <td>31.097800</td>
+      <td>77.267800</td>
+      <td>Chandigarh</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Murari</td>
+      <td>30.789800</td>
+      <td>78.917850</td>
+      <td>Uttarakhand</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Surkandaji</td>
+      <td>30.411400</td>
+      <td>78.288500</td>
+      <td>Uttarakhand</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Patiala</td>
+      <td>30.339800</td>
+      <td>76.386900</td>
+      <td>Punjab</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Mukteshwar</td>
+      <td>29.460400</td>
+      <td>79.655800</td>
+      <td>Uttarakhand</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Palam</td>
+      <td>28.590100</td>
+      <td>77.088800</td>
+      <td>Delhi</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Delhi</td>
+      <td>28.563200</td>
+      <td>77.191200</td>
+      <td>Delhi</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Mohanbari</td>
+      <td>27.472800</td>
+      <td>94.912000</td>
+      <td>Assam</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Jaipur</td>
+      <td>26.912400</td>
+      <td>75.787300</td>
+      <td>Rajasthan</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Lucknow</td>
+      <td>26.846700</td>
+      <td>80.946200</td>
+      <td>Uttar Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Patna</td>
+      <td>25.594100</td>
+      <td>85.137600</td>
+      <td>Bihar</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Sohra</td>
+      <td>25.270200</td>
+      <td>91.732300</td>
+      <td>Meghalaya</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Agartala</td>
+      <td>23.831500</td>
+      <td>91.286800</td>
+      <td>Tripura</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Bhopal</td>
+      <td>23.259900</td>
+      <td>77.412600</td>
+      <td>Madhya Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bhuj</td>
+      <td>23.242000</td>
+      <td>69.666900</td>
+      <td>Gujarat</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Kolkata</td>
+      <td>22.572600</td>
+      <td>88.363900</td>
+      <td>West Bengal</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Nagpur</td>
+      <td>21.145800</td>
+      <td>79.088200</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Paradip</td>
+      <td>20.316600</td>
+      <td>86.611400</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Veravali</td>
+      <td>19.734300</td>
+      <td>72.876300</td>
+      <td>Dadra and Nagar Haveli and Daman and Diu</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Gopalpur</td>
+      <td>19.264700</td>
+      <td>84.862000</td>
+      <td>Odisha</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Mumbai</td>
+      <td>19.076000</td>
+      <td>72.877700</td>
+      <td>Maharashtra</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Visakhapatnam</td>
+      <td>17.686800</td>
+      <td>83.218500</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Hyderabad</td>
+      <td>17.385000</td>
+      <td>78.486700</td>
+      <td>Telangana</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Machilipatnam</td>
+      <td>16.190500</td>
+      <td>81.136200</td>
+      <td>Andhra Pradesh</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Panaji</td>
+      <td>15.490900</td>
+      <td>73.827800</td>
+      <td>Goa</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Sriharikota</td>
+      <td>13.725900</td>
+      <td>80.226600</td>
+      <td>Andhra Pradesh</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Chennai</td>
+      <td>13.082700</td>
+      <td>80.270700</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Karaikal</td>
+      <td>10.925400</td>
+      <td>79.838000</td>
+      <td>Tamil Nadu</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Kochi</td>
+      <td>9.931200</td>
+      <td>76.267300</td>
+      <td>Kerala</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Thiruvananthapuram</td>
+      <td>8.524100</td>
+      <td>76.936600</td>
+      <td>Kerala</td>
+      <td>C</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge merged_df and df2 on the &quot;State&quot; column</span>
+<span class="n">merged_df_with_band</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">df2</span><span class="p">[[</span><span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;Type of DWR&#39;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Replace NaN values in the &quot;Band&quot; column with corresponding values from the &quot;Type of DWR&quot; column</span>
+<span class="n">merged_df_with_band</span><span class="p">[</span><span class="s1">&#39;Band&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">merged_df_with_band</span><span class="p">[</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Drop the &quot;Type of DWR&quot; column</span>
+<span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Type of DWR&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged_df_with_band</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_df</span> <span class="o">=</span> <span class="n">merged_df_with_band</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">f_df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Veravali&#39;</span><span class="p">,</span> <span class="s1">&#39;Band&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nan_mask</span> <span class="o">=</span> <span class="n">f_df</span><span class="p">[</span><span class="s1">&#39;Band&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+<span class="n">nan_df</span> <span class="o">=</span> <span class="n">f_df</span><span class="p">[</span><span class="n">nan_mask</span><span class="p">]</span>
+<span class="n">nan_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Band&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan_df</span><span class="p">[</span><span class="s1">&#39;Band&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">f_df</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nan_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yq/7n9vj93d6bq4gq64hx_6qgym0000gp/T/ipykernel_26103/1355819478.py:3: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  nan_df.loc[:, &#39;Band&#39;] = nan_df[&#39;Band&#39;].fillna(&#39;X&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Site&#39;</span><span class="p">,</span>
+                     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span> 
+                     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="s2">&quot;Longitude&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_df</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;Range&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span><span class="mi">250</span><span class="p">,</span>
+                    <span class="s2">&quot;X&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+                    <span class="s2">&quot;S&quot;</span><span class="p">:</span><span class="mi">250</span>
+                   <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;IMD_Radar_Sites_2022.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">IMD Radar Network 2023</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="interactive_dwrs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Visuaization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hamid Ali Syed<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

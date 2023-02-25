@@ -1,0 +1,11 @@
+format: jb-book
+root: intro
+title: IMD_Radar_Network
+chapters:
+  - file: introduction.ipynb
+  - file: imd_dwrs_2022.ipynb
+  - file: interactive_dwrs.ipynb
+  - file: map_features.py
+meta:
+  - IMD_Radar_Sites_2022.csv
+  - India-Shapefiles

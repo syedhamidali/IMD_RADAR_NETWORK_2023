@@ -1,0 +1,34 @@
+,Site,Latitude,Longitude,State,Band
+1,Srinagar,34.083656,74.797371,Jammu and Kashmir,X
+2,Jammu,32.9266,74.857,Jammu and Kashmir,X
+3,Jot,32.4868,76.0593,Himachal Pradesh,X
+4,Kufri,31.0978,77.2678,Chandigarh,X
+5,Murari,30.7898,78.91785,Uttarakhand,X
+6,Surkandaji,30.4114,78.2885,Uttarakhand,X
+7,Patiala,30.3398,76.3869,Punjab,S
+8,Mukteshwar,29.4604,79.6558,Uttarakhand,X
+9,Palam,28.5901,77.0888,Delhi,S
+10,Delhi,28.5632,77.1912,Delhi,C
+11,Mohanbari,27.4728,94.912,Assam,S
+12,Jaipur,26.9124,75.7873,Rajasthan,C
+13,Lucknow,26.8467,80.9462,Uttar Pradesh,S
+14,Patna,25.5941,85.1376,Bihar,S
+15,Sohra,25.2702,91.7323,Meghalaya,S
+16,Agartala,23.8315,91.2868,Tripura,S
+17,Bhopal,23.2599,77.4126,Madhya Pradesh,S
+18,Bhuj,23.242,69.6669,Gujarat,S
+19,Kolkata,22.5726,88.3639,West Bengal,S
+20,Nagpur,21.1458,79.0882,Maharashtra,S
+21,Paradip,20.3166,86.6114,Odisha,S
+22,Veravali,19.7343,72.8763,Dadra and Nagar Haveli and Daman and Diu,C
+23,Gopalpur,19.2647,84.862,Odisha,S
+24,Mumbai,19.076,72.8777,Maharashtra,S
+25,Visakhapatnam,17.6868,83.2185,Andhra Pradesh,S
+26,Hyderabad,17.385,78.4867,Telangana,S
+27,Machilipatnam,16.1905,81.1362,Andhra Pradesh,S
+28,Panaji,15.4909,73.8278,Goa,S
+29,Sriharikota,13.7259,80.2266,Andhra Pradesh,S
+30,Chennai,13.0827,80.2707,Tamil Nadu,S
+31,Karaikal,10.9254,79.838,Tamil Nadu,S
+32,Kochi,9.9312,76.2673,Kerala,S
+33,Thiruvananthapuram,8.5241,76.9366,Kerala,C
