@@ -3,7 +3,9 @@
 
 title: IMD Radar Network
 author: Hamid Ali Syed
+copyright: "2023"
 logo: logo.png
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
