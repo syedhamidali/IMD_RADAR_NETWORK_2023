@@ -76,15 +76,21 @@ points = df.hvplot.points(x='Longitude', y='Latitude', geo=True, color='Band',
                           alpha=0.7, coastline = True,
                  xlim=(df.Longitude.min()-5, df.Longitude.max()+3),
                  ylim=(df.Latitude.min()-3, df.Latitude.max()+3),
-                 tiles='OpenTopoMap', frame_height=800, hover_cols=['Site', 'Band'], value_label='Count')
+                 tiles='OpenTopoMap', frame_height=800, frame_width=650, hover_cols=['Site', 'Band'], value_label='Count')
 
 # Create the circle plot
-circles = gv.Polygons(data=gdf.geometry,).opts(color = "gray", fill_alpha=0.2, xlabel = "Longitude˚E", ylabel = "Latitude˚N")
+circles = gv.Polygons(data=gdf.geometry,).opts(color = "gray", fill_alpha=0.2, xlabel = "Longitude˚E", ylabel = "Latitude˚N",
+                                               frame_height=800, frame_width=650)
 # Overlay the circle plot on top of the point plot
 plot = points * circles
-
 # Show the plot
 display(plot)
+
+
+# In[7]:
+
+
+plot.
 
 
 # In[7]:
