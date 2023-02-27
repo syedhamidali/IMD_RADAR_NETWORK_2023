@@ -90,12 +90,6 @@ display(plot)
 # In[7]:
 
 
-plot.
-
-
-# In[7]:
-
-
 import urllib.request
 url = "https://raw.githubusercontent.com/syedhamidali/test_scripts/master/map_features.py"
 urllib.request.urlretrieve(url, "map_features.py")
