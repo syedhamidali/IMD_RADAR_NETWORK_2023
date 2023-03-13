@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7726986.svg)](https://doi.org/10.5281/zenodo.7726986)
 # IMD_RADAR_NETWORK_2023
 India Meteorological Department (IMD) Doppler Weather Radar (DWR) Network
 By
@@ -13,3 +14,6 @@ Check this out : https://syedha.com/IMD_RADAR_NETWORK_2023/intro.html
        height="600"
        >
 </embed>
+
+## Cite as
+Hamid Ali Syed. (2023). IMD RADAR NETWORK (1.1). Zenodo. https://doi.org/10.5281/zenodo.7726986
